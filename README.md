@@ -1,16 +1,11 @@
 # docker-xamarin-android
-Docker image includes mono/java for building Xamarin Android or Xamarin Forms project in a CI container.
 
-[![Docker Build Status](https://img.shields.io/docker/cloud/build/chiticariu/xamarin-android.svg)](https://cloud.docker.com/repository/docker/chiticariu/xamarin-android)
-
-Installed Android SDK's v27 and v28
-Installed build tools v27.0.3 and 28.0.3
-
-This image uses the Android SDK so you should agree with the Android SDK license before usage (https://developer.android.com/studio/terms.html°
+Forked from [chiticariu's Fedora 27 Xamarin build image](https://github.com/chiticariu/xamarin-android) but updated to Android SDK 30, based on [rheuvel89's Ubuntu 20.04 Xamarin build image](https://github.com/rheuvel89/xamarin-android/). This image uses the Android SDK so you should agree with the Android SDK license before usage (https://developer.android.com/studio/terms.html)
 
 ## Example `.gitlab-ci` file
+
 ```
-image: chiticariu/xamarin-android
+image: sakurina/xamarin-android
 
 stages:
     - build
@@ -31,12 +26,12 @@ build:
       - msbuild src/<android_project_directory>/<android_project_file_name>.csproj /p:AndroidSdkDirectory=/android/sdk /p:AndroidNdkDirectory=/android/sdk/ndk-bundle /p:Configuration="Release" /p:Platform="Any CPU" /t:SignAndroidPackage /p:OutputPath="../../publish_android/"
 
 ```
-## Extra helper command
-- Run docker image in terminal having the code mounted
-```
-Linux:    docker run -it -v $(pwd):/xamarin_project chiticariu/xamarin-android /bin/bash
-Windows:  docker run -it -v %cd%:/xamarin_project chiticariu/xamarin-android /bin/bash
-```
 
-References:
-https://hub.docker.com/r/nathansamson/xamarin-android-docker
+## Extra helper command
+
+- Run docker image in terminal having the code mounted
+
+```
+Linux:    docker run -it -v $(pwd):/xamarin_project sakurina/xamarin-android /bin/bash
+Windows:  docker run -it -v %cd%:/xamarin_project sakurina/xamarin-android /bin/bash
+```
